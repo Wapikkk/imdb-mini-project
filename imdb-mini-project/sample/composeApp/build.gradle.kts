@@ -27,6 +27,8 @@ kotlin {
             implementation(compose.foundation)
             implementation(compose.material)
             implementation(project(":shared"))
+            implementation("moe.tlaster:precompose:1.5.4")
+            implementation("moe.tlaster:precompose-viewmodel:1.5.4")
         }
 
         androidMain.dependencies {

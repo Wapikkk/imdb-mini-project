@@ -1,11 +1,16 @@
 package com.wapekk.imdb
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerialName
 
 @Serializable
 data class Movie(
     val id: Int,
     val title: String,
     val overview: String,
-    val poster_path: String,
-    val vote_average: Double
+
+    @SerialName("poster_path")
+    val posterPath: String,
+
+    @SerialName("vote_average")
+    val voteAverage: Double
 )
