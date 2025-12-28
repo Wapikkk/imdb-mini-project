@@ -8,19 +8,20 @@ plugins {
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 
     androidTarget { publishLibraryVariants("release") }
     iosX64()
     iosArm64()
     iosSimulatorArm64()
-    mingwX64()
+//    mingwX64()
 
     sourceSets {
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.ui)
             implementation(compose.foundation)
+            implementation(compose.material)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.coroutines.test)
             implementation(libs.kotlinx.serialization.json)
@@ -30,6 +31,8 @@ kotlin {
             implementation(libs.ktor.client.serialization)
             implementation(libs.ktor.serialization.json)
             implementation(libs.ktor.client.logging)
+            api("moe.tlaster:precompose:1.5.4")
+            api("moe.tlaster:precompose-viewmodel:1.5.4")
         }
 
         commonTest.dependencies {
