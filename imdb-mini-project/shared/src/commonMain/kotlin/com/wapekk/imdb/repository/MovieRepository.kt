@@ -1,4 +1,5 @@
-package com.wapekk.imdb
+package com.wapekk.imdb.repository
+import com.wapekk.imdb.model.Movie
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.contentnegotiation.*

@@ -1,4 +1,4 @@
-package com.wapekk.imdb
+package com.wapekk.imdb.model
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
 

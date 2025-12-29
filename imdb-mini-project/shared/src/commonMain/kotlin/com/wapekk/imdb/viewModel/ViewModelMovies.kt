@@ -1,6 +1,6 @@
 package com.wapekk.imdb.viewModel
-import com.wapekk.imdb.Movie
-import com.wapekk.imdb.MovieRepository
+import com.wapekk.imdb.model.Movie
+import com.wapekk.imdb.repository.MovieRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
