@@ -16,7 +16,7 @@ class MainActivity : PreComposeActivity() {
             val viewModel = viewModel(ViewModelMovies::class) {
                 ViewModelMovies(repository)
             }
-            MovieApp(viewModel)
+            MovieApp()
         }
     }
 }
