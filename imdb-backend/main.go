@@ -36,6 +36,7 @@ func main() {
 		c.JSON(http.StatusOK, movies)
 	})
 	r.POST("/register", handlers.Register)
+	r.POST("/login", handlers.Login)
 
 	r.Run(":8080")
 }
