@@ -1,32 +1,33 @@
 package com.wapekk.imdb.repository
-import com.wapekk.imdb.model.AuthResponse
-import com.wapekk.imdb.model.RegisterRequest
+import com.wapekk.imdb.model.*
 import io.ktor.client.*
+import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 
 class AuthRepository(private val client: HttpClient) {
-    suspend fun register(request: RegisterRequest): Boolean {
+//  Autentikasi Registrasi
+    suspend fun register(request: RegisterRequest): AuthResponse {
         return try {
             val response = client.post("http://10.0.2.2:8080/register") {
                 contentType(ContentType.Application.Json)
                 setBody(request)
             }
-            response.status == HttpStatusCode.Created
+            response.body()
         } catch (e: Exception) {
-            false
+            AuthResponse(message = "Gagal terhubung ke server", success = false)
         }
     }
-
-    suspend fun login(request: LoginRequest): Boolean {
+//  Autentikasi Login
+    suspend fun login(request: LoginRequest): AuthResponse {
         return try {
-            val response = client.post("http//10.0.2.2:8080/login") {
+            val response = client.post("http://10.0.2.2:8080/login") {
                 contentType(ContentType.Application.Json)
                 setBody(request)
             }
-            response.status == HttpStatusCode.Created
+            response.body()
         } catch (e: Exception) {
-            AuthResponse("Gagal Terhubung ke Server", false)
+            AuthResponse(message = "Gagal Terhubung ke Server", success = false)
         }
     }
 }

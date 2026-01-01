@@ -4,9 +4,7 @@ import androidx.compose.runtime.Composable
 import moe.tlaster.precompose.navigation.*
 import com.wapekk.imdb.repository.MovieRepository
 import com.wapekk.imdb.viewModel.ViewModelMovies
-import sample.app.screens.LandingPageScreen
-import sample.app.screens.MovieListScreen
-import sample.app.screens.RegisterScreen
+import sample.app.screens.*
 
 @Composable
 fun MovieApp() {
@@ -19,8 +17,14 @@ fun MovieApp() {
         scene("landing") {
             LandingPageScreen (onStartClicked = { navigator.navigate("register")})
         }
+        scene("login") {
+            LoginScreen (
+                onLoginSuccess = {navigator.navigate("movies")},
+                onRegisterClicked = {navigator.navigate("register")}
+            )
+        }
         scene("register") {
-            RegisterScreen (onRegisterSuccess = { navigator.navigate("movies")})
+            RegisterScreen (onRegisterSuccess = { navigator.navigate("login")})
         }
         scene("movies") {
             val repository = MovieRepository()
