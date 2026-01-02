@@ -12,17 +12,13 @@ class ViewModelMovies (private val repository: MovieRepository) : ViewModel() {
     val movies: StateFlow<List<Movie>> = _movies
 
     init {
-        loadMovies()
+        fetchMovies()
     }
 
-    private fun loadMovies(){
+    private fun fetchMovies(){
         viewModelScope.launch {
-            try {
-                val result = repository.fetchMovies()
-                _movies.value = result
-            } catch (e: Exception) {
-                println("Error: Gagal mengambil film: ${e.message}")
-            }
+            val result = repository.fetchMovies()
+            _movies.value = result
         }
     }
 }
