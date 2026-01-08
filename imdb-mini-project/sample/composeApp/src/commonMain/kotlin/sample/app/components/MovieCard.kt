@@ -1,22 +1,38 @@
 package sample.app.components
-import androidx.compose.foundation.background
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.ui.*
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.unit.*
+import androidx.compose.ui.layout.*
+import coil3.compose.AsyncImage
 import com.wapekk.imdb.model.Movie
 
 @Composable
 fun MovieCard(movie: Movie) {
-    Card (elevation = 4.dp, modifier = Modifier.fillMaxWidth() ){
-        Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-            Box(modifier = Modifier.size(60.dp).background(Color.Gray))
-            Spacer(modifier = Modifier.width(16.dp))
-            Column{
+    val imageUrl = "https://image.tmdb.org/t/p/w500${movie.posterPath}"
+
+    Card (
+        elevation = 4.dp,
+        modifier = Modifier.fillMaxWidth().padding(4.dp)
+    ){
+        Row (
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            AsyncImage(
+                model = imageUrl,
+                contentDescription = movie.title,
+                modifier = Modifier.width(100.dp).height(150.dp),
+                contentScale = ContentScale.Crop
+            )
+
+            Column(
+                modifier = Modifier.padding(16.dp)
+            ) {
                 Text(text = movie.title, style = MaterialTheme.typography.h6)
-                Text(text = "Rating: ${movie.voteAverage}", color = Color.DarkGray)
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(text = "Rating: ⭐ ${movie.voteAverage}")
             }
         }
     }

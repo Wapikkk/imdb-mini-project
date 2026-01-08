@@ -3,12 +3,10 @@ package main
 import (
 	"fmt"
 	"log"
-	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/wapekk/imdb-backend/config"
 	"github.com/wapekk/imdb-backend/handlers"
-	"github.com/wapekk/imdb-backend/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -27,14 +25,7 @@ func main() {
 	fmt.Println("Berhasil terhubung ke database")
 	r := gin.Default()
 
-	r.GET("/movies", func(c *gin.Context) {
-		var movies []models.Movie
-		if err := config.DB.Find(&movies).Error; err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-			return
-		}
-		c.JSON(http.StatusOK, movies)
-	})
+	r.GET("/movies", handlers.GetMovies)
 	r.POST("/register", handlers.Register)
 	r.POST("/login", handlers.Login)
 

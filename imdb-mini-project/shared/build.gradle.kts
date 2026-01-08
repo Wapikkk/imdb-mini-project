@@ -31,6 +31,8 @@ kotlin {
             implementation(libs.ktor.client.serialization)
             implementation(libs.ktor.serialization.json)
             implementation(libs.ktor.client.logging)
+            implementation("io.coil-kt.coil3:coil-compose:3.0.0-rc01")
+            implementation("io.coil-kt.coil3:coil-network-ktor3:3.0.0-rc01")
             api("moe.tlaster:precompose:1.5.4")
             api("moe.tlaster:precompose-viewmodel:1.5.4")
         }

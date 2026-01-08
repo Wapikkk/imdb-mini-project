@@ -27,6 +27,8 @@ kotlin {
             implementation(compose.foundation)
             implementation(compose.material)
             implementation(project(":shared"))
+            implementation("io.coil-kt.coil3:coil-compose:3.0.0-rc01")
+            implementation("io.coil-kt.coil3:coil-network-ktor3:3.0.0-rc01")
             implementation("moe.tlaster:precompose:1.5.4")
             implementation("moe.tlaster:precompose-viewmodel:1.5.4")
         }
