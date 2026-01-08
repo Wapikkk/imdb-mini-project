@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.compose)
     alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlinx.serialization)
 }
 
 kotlin {
@@ -27,6 +28,9 @@ kotlin {
             implementation(compose.foundation)
             implementation(compose.material)
             implementation(project(":shared"))
+            implementation("io.ktor:ktor-client-core:3.0.0")
+            implementation("io.ktor:ktor-client-content-negotiation:3.0.0")
+            implementation("io.ktor:ktor-serialization-kotlinx-json:3.0.0")
             implementation("io.coil-kt.coil3:coil-compose:3.0.0-rc01")
             implementation("io.coil-kt.coil3:coil-network-ktor3:3.0.0-rc01")
             implementation("moe.tlaster:precompose:1.5.4")

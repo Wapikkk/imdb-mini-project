@@ -1,13 +1,10 @@
 package com.wapekk.imdb.viewModel
 
-import com.wapekk.imdb.model.LoginRequest
-import com.wapekk.imdb.model.RegisterRequest
+import com.wapekk.imdb.model.*
 import com.wapekk.imdb.repository.AuthRepository
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import moe.tlaster.precompose.viewmodel.ViewModel
-import moe.tlaster.precompose.viewmodel.viewModelScope
+import moe.tlaster.precompose.viewmodel.*
 
 class ViewModelAuth(private val repository: AuthRepository) : ViewModel() {
     private val _isLoading = MutableStateFlow(false)
