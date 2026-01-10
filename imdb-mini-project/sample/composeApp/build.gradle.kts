@@ -6,6 +6,10 @@ plugins {
     alias(libs.plugins.kotlinx.serialization)
 }
 
+compose.resources{
+    generateResClass = always
+}
+
 kotlin {
     jvmToolchain(21)
 
@@ -27,6 +31,8 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.foundation)
             implementation(compose.material)
+            implementation(compose.components.resources)
+            implementation(compose.materialIconsExtended)
             implementation(project(":shared"))
             implementation("io.ktor:ktor-client-core:3.0.0")
             implementation("io.ktor:ktor-client-content-negotiation:3.0.0")

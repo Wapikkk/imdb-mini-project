@@ -13,16 +13,25 @@ import com.wapekk.imdb.viewModel.ViewModelMovies
 fun MovieListScreen(viewModel: ViewModelMovies) {
     val movie by viewModel.movies.collectAsState()
 
-    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+    Column(
+        modifier = Modifier.fillMaxSize().padding(16.dp)
+    ){
         Text(text = "IMDb Mini Project", style = MaterialTheme.typography.h4)
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(
+            modifier = Modifier.height(16.dp)
+        )
 
         if (movie.isEmpty()) {
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ){
                 CircularProgressIndicator()
             }
         } else {
-            LazyColumn (verticalArrangement = Arrangement.spacedBy(8.dp)){
+            LazyColumn (
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ){
                 items(items = movie) { movie ->
                     MovieCard(movie)
                 }

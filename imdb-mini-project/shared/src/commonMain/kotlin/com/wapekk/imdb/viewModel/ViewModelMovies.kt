@@ -11,9 +11,7 @@ class ViewModelMovies (private val repository: MovieRepository) : ViewModel() {
     private val _movies = MutableStateFlow<List<Movie>>(emptyList())
     val movies: StateFlow<List<Movie>> = _movies
 
-    init {
-        fetchMovies()
-    }
+    init {fetchMovies()}
 
     private fun fetchMovies(){
         viewModelScope.launch {

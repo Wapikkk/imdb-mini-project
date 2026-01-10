@@ -6,7 +6,6 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 
 class AuthRepository(private val client: HttpClient) {
-//  Autentikasi Registrasi
     suspend fun register(request: RegisterRequest): AuthResponse {
         return try {
             val response = client.post("http://10.0.2.2:8080/register") {
@@ -18,7 +17,7 @@ class AuthRepository(private val client: HttpClient) {
             AuthResponse(message = "Gagal terhubung ke server", success = false)
         }
     }
-//  Autentikasi Login
+
     suspend fun login(request: LoginRequest): AuthResponse {
         return try {
             val response = client.post("http://10.0.2.2:8080/login") {
