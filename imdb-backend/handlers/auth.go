@@ -19,11 +19,11 @@ func Register(c *gin.Context) {
 
 	hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(input.Password), bcrypt.DefaultCost)
 
-	result := config.DB.Where("INSERT INTO users (full_name, phone_number, email, password) VALUES ($1, $2, $3, $4)",
-		input.FullName, input.PhoneNumber, input.Email, string(hashedPassword))
+	err := config.DB.Exec("INSERT INTO users (full_name, phone, email, password) VALUES ($1, $2, $3, $4)",
+		input.FullName, input.PhoneNumber, input.Email, string(hashedPassword)).Error
 
-	if result.Error != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Gagal menyimpan data"})
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Gagal menyimpan data " + err.Error()})
 		return
 	}
 
@@ -49,5 +49,5 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": "Login Berhasil", "succes": true})
+	c.JSON(http.StatusOK, gin.H{"message": "Login Berhasil", "success": true})
 }

@@ -51,7 +51,8 @@ fun MovieApp() {
         }
         scene("movies") {
             val vm = viewModel(ViewModelMovies::class) { ViewModelMovies(movieRepository) }
-            MovieListScreen(viewModel = vm)
+            MovieListContent(viewModel = vm)
+            HomeScreen(viewModel = vm)
         }
     }
 }

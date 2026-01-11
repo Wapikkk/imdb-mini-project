@@ -1,10 +1,11 @@
 package sample.app.screens
+import sample.app.components.ButtonAuth
+import sample.app.components.InputFieldAuth
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.*
 import androidx.compose.ui.graphics.*
 import com.wapekk.imdb.viewModel.ViewModelAuth
@@ -15,54 +16,67 @@ fun LoginScreen (
     onLoginSuccess: () -> Unit,
     onRegisterClicked: () -> Unit
 ) {
-    var email by remember {(mutableStateOf(""))}
-    var password by remember {(mutableStateOf(""))}
-
-    val isLoading by viewModel.isLoading.collectAsState()
-    val isSuccess by viewModel.isSuccess.collectAsState()
-    val message by viewModel.message.collectAsState()
-
-    LaunchedEffect(isSuccess) {
-        if(isSuccess) {
-            onLoginSuccess()
-            viewModel.resetState()
-        }
-    }
-
-    Column (
-        modifier = Modifier.fillMaxSize().padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+    Surface (
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colors.background
     ){
-        Text("Masuk ke IMDb", style = MaterialTheme.typography.h4)
-        Spacer(modifier = Modifier.height(32.dp))
+        var email by remember {(mutableStateOf(""))}
+        var password by remember {(mutableStateOf(""))}
 
-        OutlinedTextField(value = email, onValueChange = {email = it}, label = { Text("Email") }, modifier = Modifier.fillMaxWidth())
-        Spacer(modifier = Modifier.height(16.dp))
-        OutlinedTextField(value = password, onValueChange = {password = it}, label = { Text("Password") }, visualTransformation =  PasswordVisualTransformation(), modifier = Modifier.fillMaxWidth())
+        val isLoading by viewModel.isLoading.collectAsState()
+        val isSuccess by viewModel.isSuccess.collectAsState()
+        val message by viewModel.message.collectAsState()
 
-        if (message.isNotEmpty()) {
-            Text(text = message, color = Color.Red, modifier = Modifier.padding(top = 8.dp))
-        }
-
-        Spacer(modifier = Modifier.height(32.dp))
-
-        Button(
-            onClick = {viewModel.login(email, password)},
-            modifier = Modifier.fillMaxWidth(),
-            enabled = !isLoading
-        ){
-            if (isLoading) {
-                CircularProgressIndicator(color = Color.White, modifier = Modifier.size(20.dp))
-            }else{
-                Text("Masuk")
+        LaunchedEffect(isSuccess) {
+            if(isSuccess) {
+                onLoginSuccess()
+                viewModel.resetState()
             }
         }
 
-        TextButton(
-            onClick = onRegisterClicked
-        ) {
-            Text("Belum punya akun? Daftar Di sini")
+        Column (
+            modifier = Modifier.fillMaxSize().padding(24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ){
+            Text(
+                "Masuk ke IMDb",
+                style = MaterialTheme.typography.h4
+            )
+            Spacer(modifier = Modifier.height(32.dp))
+
+            InputFieldAuth(
+                value = email,
+                onValueChange = {email = it},
+                label = "Email"
+            )
+
+            InputFieldAuth(
+                value = password,
+                onValueChange = {password = it},
+                label = "Password",
+                isPassword = true
+            )
+
+            if (message.isNotEmpty()) {
+                Text(text = message, color = Color.Red, modifier = Modifier.padding(top = 8.dp))
+            }
+
+            Spacer(modifier = Modifier.height(32.dp))
+
+            ButtonAuth(
+                text = "Masuk",
+                onClick = {
+                    viewModel.login(email, password)
+                },
+                isLoading = isLoading
+            )
+
+            TextButton(
+                onClick = onRegisterClicked
+            ) {
+                Text("Belum punya akun? Daftar Di sini")
+            }
         }
     }
 }

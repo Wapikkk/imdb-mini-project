@@ -8,7 +8,7 @@ import io.ktor.http.*
 class AuthRepository(private val client: HttpClient) {
     suspend fun register(request: RegisterRequest): AuthResponse {
         return try {
-            val response = client.post("http://10.0.2.2:8080/register") {
+            val response = client.post("http://192.168.0.113:8080/register") {
                 contentType(ContentType.Application.Json)
                 setBody(request)
             }
@@ -20,12 +20,14 @@ class AuthRepository(private val client: HttpClient) {
 
     suspend fun login(request: LoginRequest): AuthResponse {
         return try {
-            val response = client.post("http://10.0.2.2:8080/login") {
+            val response = client.post("http://192.168.0.113:8080/login") {
                 contentType(ContentType.Application.Json)
                 setBody(request)
             }
             response.body()
         } catch (e: Exception) {
+            println("DEBUG_AUTH: ${e.message}")
+            e.printStackTrace()
             AuthResponse(message = "Gagal Terhubung ke Server", success = false)
         }
     }

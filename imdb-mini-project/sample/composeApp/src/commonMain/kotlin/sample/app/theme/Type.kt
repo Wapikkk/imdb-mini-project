@@ -9,6 +9,7 @@ import org.jetbrains.compose.resources.Font
 import imdb_mini_project.sample.composeapp.generated.resources.Res
 import imdb_mini_project.sample.composeapp.generated.resources.merriweather_italic
 import imdb_mini_project.sample.composeapp.generated.resources.merriweather_regular
+import imdb_mini_project.sample.composeapp.generated.resources.robotoSlab_regular
 
 @Composable
 fun getImdbTypography(): Typography {
@@ -16,6 +17,10 @@ fun getImdbTypography(): Typography {
     val merriweatherFontFamily = FontFamily(
         Font(Res.font.merriweather_italic),
         Font(Res.font.merriweather_regular)
+    )
+
+    val robotoSlab_regular = FontFamily(
+        Font(Res.font.robotoSlab_regular)
     )
 
     return Typography(
@@ -26,6 +31,11 @@ fun getImdbTypography(): Typography {
         ),
         body1 = TextStyle(
             fontFamily = merriweatherFontFamily,
+            fontWeight = FontWeight.Normal,
+            fontSize = 16.sp
+        ),
+        body2 = TextStyle (
+            fontFamily = robotoSlab_regular,
             fontWeight = FontWeight.Normal,
             fontSize = 16.sp
         )

@@ -1,6 +1,7 @@
 package sample.app.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.*
@@ -51,7 +52,7 @@ fun LandingPageScreen(
                 modifier = Modifier
                     .width(150.dp)
                     .height(50.dp),
-                shape = MaterialTheme.shapes.medium
+                shape = RoundedCornerShape(16.dp)
             ) {
                 Text(
                     "Mulai",

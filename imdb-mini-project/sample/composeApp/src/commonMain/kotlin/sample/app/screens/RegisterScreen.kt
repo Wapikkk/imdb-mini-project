@@ -1,14 +1,14 @@
 package sample.app.screens
+import sample.app.components.InputFieldAuth
+import sample.app.components.ButtonAuth
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
-import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.*
 import androidx.compose.ui.graphics.*
-import androidx.compose.material.icons.*
 import com.wapekk.imdb.viewModel.ViewModelAuth
 
 @Composable
@@ -26,8 +26,6 @@ fun RegisterScreen(
         var email by remember { mutableStateOf("") }
         var password by remember { mutableStateOf("") }
         var confirmPassword by remember { mutableStateOf("") }
-        var passwordVisible by remember { mutableStateOf(false) }
-        var confirmPasswordVisible by remember { mutableStateOf(false) }
 
         val isLoading by viewModel.isLoading.collectAsState()
         val message by viewModel.message.collectAsState()
@@ -50,54 +48,36 @@ fun RegisterScreen(
         ){
             Text("Buat Akun Baru", style = MaterialTheme.typography.h5)
 
-            OutlinedTextField(
+            InputFieldAuth(
                 value = name,
-                onValueChange = {name = it},
-                label = {Text ("Nama Lengkap")},
-                modifier = Modifier.fillMaxWidth()
+                onValueChange = { name = it },
+                label = "Nama Lengkap"
             )
-            OutlinedTextField(
+
+            InputFieldAuth(
                 value = phone,
-                onValueChange = {phone = it},
-                label = {Text ("Nomor Hp")},
-                modifier = Modifier.fillMaxWidth()
+                onValueChange = { phone = it },
+                label = "Nomor Hp"
             )
-            OutlinedTextField(
+
+            InputFieldAuth(
                 value = email,
-                onValueChange = {email = it},
-                label = {Text("Email")},
-                modifier = Modifier.fillMaxWidth()
+                onValueChange = { email = it },
+                label = "Email"
             )
-            OutlinedTextField(
+
+            InputFieldAuth(
                 value = password,
-                onValueChange = {password = it},
-                label = {Text("Password")},
-                modifier = Modifier.fillMaxWidth(),
-                visualTransformation = if(passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-                trailingIcon = {
-                    val image =
-                        if (passwordVisible) Icons.Filled.Visibility else Icons.Filled.VisibilityOff
-                    IconButton(onClick = { passwordVisible = !passwordVisible }) {
-                        Icon(imageVector = image, contentDescription = "Toggle Password Visibility")
-                    }
-                }
+                onValueChange = { password = it },
+                label = "Password",
+                isPassword = true
             )
-            OutlinedTextField(
+
+            InputFieldAuth(
                 value = confirmPassword,
-                onValueChange = {confirmPassword = it},
-                label = {Text("Konfirmasi Password")},
-                modifier = Modifier.fillMaxWidth(),
-                visualTransformation = if(confirmPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-                trailingIcon = {
-                    val image =
-                        if (confirmPasswordVisible) Icons.Filled.Visibility else Icons.Filled.VisibilityOff
-                    IconButton(onClick = { confirmPasswordVisible = !confirmPasswordVisible }) {
-                        Icon(
-                            imageVector = image,
-                            contentDescription = "Toggle Confirm Password Visibility"
-                        )
-                    }
-                }
+                onValueChange = { confirmPassword = it },
+                label = "Konfirmasi Password",
+                isPassword = true
             )
 
             if (message.isNotEmpty()) {
@@ -110,24 +90,21 @@ fun RegisterScreen(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            Button(
+            ButtonAuth(
+                text = "Daftar",
                 onClick = {
                     viewModel.register(name, phone, email, password, confirmPassword)
                 },
-                modifier = Modifier.fillMaxWidth(),
-                enabled = !isLoading
-            ) {
-                if (isLoading) {
-                    CircularProgressIndicator(color = Color.White, modifier = Modifier.size(20.dp))
-                } else {
-                    Text ("Daftar")
-                }
-            }
+                isLoading = isLoading
+            )
 
             TextButton(
                 onClick = onLoginSuccess
             ) {
-                Text("Sudah punya akun? Login")
+                Text(
+                    "Sudah punya akun? Login",
+                    style = MaterialTheme.typography.body2
+                )
             }
         }
     }

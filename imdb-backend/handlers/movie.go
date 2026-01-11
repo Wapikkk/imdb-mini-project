@@ -2,13 +2,16 @@ package handlers
 
 import (
 	"encoding/json"
+	"net/http"
+
+	"os"
+
 	"github.com/gin-gonic/gin"
 	"github.com/wapekk/imdb-backend/models"
-	"net/http"
 )
 
 func GetMovies(c *gin.Context) {
-	apiKey := "5edd888394a11ec849afd01f0949cbdc"
+	apiKey := os.Getenv("TMDB_API_KEY")
 	url := "https://api.themoviedb.org/3/movie/popular?api_key=" + apiKey
 
 	resp, err := http.Get(url)
